@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea-Steel Marine & Offshore Services Ltd. | Excellence in Marine Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean-navy: #003366;
+            --ocean-blue: #0077BE;
+            --light-blue: #00A8E8;
+            --pale-blue: #E6F3FF;
+            --alice-blue: #F0F8FF;
+            --teal-accent: #008080;
+            --white: #FFFFFF;
+            --dark-gray: #333333;
+            --light-gray: #666666;
+            --steel-gray: #708090;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--alice-blue);
+        }
+        header {
+            background: var(--ocean-navy);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin: 0;
+        }
+        nav {
+            background: var(--ocean-navy);
+            padding: 0.5rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            transition: opacity 0.3s ease;
+        }
+        nav.scrolled {
+            opacity: 0.9;
+        }
+        .desktop-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .desktop-nav li {
+            margin: 0 1rem;
+        }
+        nav a {
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--ocean-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        nav a:hover::after {
+            transform: scaleX(1);
+        }
+        nav a:hover {
+            color: var(--light-blue);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1002;
+            transition: opacity 0.3s ease;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        .mobile-menu.active ~ .hamburger {
+            display: none;
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -50%;
+            width: 50%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--ocean-navy);
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .mobile-menu li {
+            margin: 0.25rem 0;
+            border-bottom: 1px solid var(--ocean-blue);
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 0.25rem;
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .mobile-menu a:hover {
+            color: var(--light-blue);
+        }
+        .exit-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--light-blue);
+            cursor: pointer;
+            z-index: 1001;
+        }
+        body.scrolled .hamburger {
+            opacity: 0.8;
+        }
+        body.scrolled .mobile-menu.active .hamburger {
+            opacity: 1;
+        }
+        .hero {
+            background-image: url('images/hero-offshore-rig.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            margin-top: 0;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #00336659;
+            z-index: 1;
+        }
+        .hero > * {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin: 0 0 1rem;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero .section-container p {
+            color: var(--ocean-navy);
+        }
+        section {
+            padding: 60px 20px;
+            max-width: 100%;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            border: 1px solid var(--light-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #vessels {
+            background-image: url('images/offshore-vessels-bg.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        #vessels::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #70809094;
+            z-index: 1;
+        }
+        #vessels > * {
+            position: relative;
+            z-index: 2;
+        }
+        #vessels .section-container {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 1rem;
+        }
+        #vessels .vessel-block {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        #vessels .vessel-item {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid var(--light-blue);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #vessels .vessel-item:hover {
+            transform: scale(1.02);
+        }
+        #vessels .vessel-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        #vessels .vessel-item h3 {
+            margin: 0.5rem 0;
+            color: var(--ocean-navy);
+            font-size: 1.1rem;
+        }
+        #vessels .vessel-item p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        #vessels .vessel-item .read-more {
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        #vessels .vessel-item .read-more:hover {
+            text-decoration: underline;
+        }
+        #vessels .vessel-item .details {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--light-blue);
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        #about, #mission, #clients {
+            background: var(--white);
+        }
+        #services, #team {
+            background: var(--ocean-navy);
+            color: var(--white);
+        }
+        #services .section-container, #team .section-container {
+            background: var(--white);
+            color: var(--dark-gray);
+        }
+        #services h2, #services h3, #team h2 {
+            color: var(--ocean-navy);
+        }
+        #services ul li {
+            background: var(--alice-blue);
+            border-color: var(--light-blue);
+            color: var(--dark-gray);
+        }
+        #services ul li::before {
+            color: var(--teal-accent);
+        }
+        #team {
+            background-image: url('images/engineering-team.png');
+            background-size: cover;
+            background-position: center;
+        }
+        #team::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0033669c;
+            z-index: 1;
+        }
+        #team > * {
+            position: relative;
+            z-index: 2;
+        }
+        #team .team-member {
+            background: var(--alice-blue);
+            color: var(--dark-gray);
+            border-color: var(--light-blue);
+        }
+        #team .team-member h4 {
+            color: var(--ocean-navy);
+        }
+        h2 {
+            color: var(--ocean-navy);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        h3 {
+            color: var(--ocean-blue);
+            font-size: 1.8rem;
+            margin-top: 2rem;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: var(--alice-blue);
+            margin: 10px 0;
+            padding: 15px 15px 15px 40px;
+            border-left: 4px solid var(--light-blue);
+            border: 1px solid var(--light-blue);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        ul li:hover {
+            transform: translateX(5px);
+        }
+        ul li::before {
+            content: '▶';
+            color: var(--teal-accent);
+            font-weight: bold;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .clients {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .client {
+            padding: 20px;
+            border: 2px solid var(--light-blue);
+            background: var(--white);
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .client:hover {
+            border-color: var(--ocean-blue);
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .team-member {
+            background: var(--alice-blue);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--light-blue);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+        .team-member:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .team-member h4 {
+            color: var(--ocean-navy);
+            margin-bottom: 10px;
+        }
+        .contact {
+            background: var(--ocean-navy);
+            color: var(--white);
+            text-align: center;
+        }
+        .contact .section-container {
+            background: var(--white);
+            color: var(--dark-gray);
+        }
+        .contact a {
+            color: var(--ocean-blue);
+            text-decoration: none;
+        }
+        footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        #chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--ocean-blue);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1003;
+            transition: background 0.3s;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            line-height: 50px;
+        }
+        #chat-btn:hover {
+            background: var(--ocean-navy);
+        }
+        @media (min-width: 769px) {
+            nav {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .clients {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            header {
+                padding: 1rem 0.5rem;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .desktop-nav {
+                display: none;
+            }
+            .mobile-menu a {
+                font-size: 0.95rem;
+                padding: 0.25rem;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero {
+                padding: 60px 15px;
+                margin-top: 0;
+            }
+            section {
+                padding: 40px 15px;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            ul li {
+                font-size: 0.95rem;
+                padding: 12px 12px 12px 40px;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .team-member {
+                padding: 15px;
+            }
+            .team-member h4 {
+                font-size: 1.2rem;
+            }
+            #vessels .vessel-block {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sea-Steel Marine & Offshore Services Ltd.</h1>
+        <p>RC: 1060991 | Excellence in Marine and Offshore Solutions Since 2012</p>
+    </header>
+    
+    <nav>
+        <ul class="desktop-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#vessels">Vessels</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#clients">Clients</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <button class="exit-btn" onclick="closeMenu()">&times;</button>
+            <ul>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#mission" onclick="closeMenu()">Mission</a></li>
+                <li><a href="#services" onclick="closeMenu()">Services</a></li>
+                <li><a href="#vessels" onclick="closeMenu()">Vessels</a></li>
+                <li><a href="#team" onclick="closeMenu()">Team</a></li>
+                <li><a href="#clients" onclick="closeMenu()">Clients</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero" id="hero">
+        <div class="section-container">
+            <h2>Navigating Excellence in the Oil & Gas Industry</h2>
+            <p>Incorporated on August 29, 2012, Sea-Steel Marine & Offshore Services Limited (SMSL) is a premier provider of comprehensive marine and offshore solutions in Nigeria. With a commitment to engineering, fabrication, repairs, and maintenance, we deliver unparalleled support to the oil & gas sector.</p>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="section-container">
+            <h2>About Us</h2>
+            <p>Sea-Steel Marine & Offshore Services Limited (SMSL) was incorporated as a limited liability company in Nigeria on the 29th day of August, 2012 with a registration No. RC:1060991.</p>
+            <p>The Company’s Corporate Headquarters is located at No. 33 Creek Road, Ibru Jetty, Apapa, Lagos and Branch Office is located at No. 5 Afaha Uqua-Obotim Street, Eket, LGA, Akwa Ibom State, Nigeria.</p>
+            <p>The Company commenced operations in 2012 and has been engaged in ship chartering and repairs, Manning agency and procurement, marine engines overhauling and repairs, Oil & Gas tools services, marine cargo pumps parts reproduction services, Foundry works & moldings, Ship repairs, and General contractors.</p>
+            <p>In order to maintain a disciplined and customer oriented philosophy, sea-steel marine and offshore services limited (SMSL) has established an effective training and evaluation structure for all cadres of company personnel business and operations, especially in the areas of personnel performance and total compliance to security, health, safety, environmental and community relations concerns.</p>
+            <p>The company policy statement advocates total commitment to compromising and quality, safety management of projects without relations issue, health, safety and environmental and community relations issue.</p>
+        </div>
+    </section>
+    
+    <section id="mission">
+        <div class="section-container">
+            <h2>Mission Statement</h2>
+            <p>Sea-Steel Marine & Offshore Services Limited (SMSL) is a marine oil field electro-mechanical engineering, construction engineers, structural and molding engineers manufacturing firm of marine equipment, ship building, boat, machinery and scientific appliances operators, devices of every description whilst in Nigeria and general contractors company helping develop and support the oil & gas industry in Nigeria through the provision of technical expertise and excellent management resources and experience.</p>
+            <p>We are fully an Engineering, Fabrication, Overhauling & Repairs, Ship Repairs and Maintenance Organization. Our management staff possesses considerable experience in marine works and workshop history of marine engineering project capabilities. The company boasts an excellent team of experimental personnel that are able to provide effective project management for marine engineering projects.</p>
+            <p>The company’s business activities can be broadly classified into the following principal areas: Project management, communication skills for effective management, professional supervision skills workshop, performance management, management of change, strategy management-recruitment, project management value, base leadership, total quality management, leadership and team building, attitude development/assertive skills etc.</p>
+        </div>
+    </section>
+    
+    <section id="services">
+        <div class="section-container">
+            <h2>Our Services</h2>
+            <h3>Project Support Services</h3>
+            <ul>
+                <li>Storing and stacking of landed materials</li>
+                <li>Warehouse: General onshore/offshore logistics services</li>
+                <li>Procurement and material supply</li>
+                <li>Manpower and crew logistics</li>
+                <li>Offshore maintenance services</li>
+                <li>Overhauling and repairs of oil & gas tools services</li>
+                <li>General engineering services</li>
+            </ul>
+            <h3>Core Areas of Specialization</h3>
+            <ul>
+                <li>Vessels Management and Operations</li>
+                <li>Vessels Repairs and Maintenance</li>
+                <li>Ship Repairs and Dry Docking</li>
+                <li>Vessels Chartering</li>
+                <li>Marine and Offshore Services</li>
+                <li>Diving Operations</li>
+                <li>Oil Tanker Mooring and Unmooring Operations</li>
+                <li>Rig Move</li>
+                <li>Crew Manning Agency and Logistics</li>
+                <li>Marine Engines Repairs and Overhauling</li>
+                <li>Pipes Welding and Fabrication</li>
+                <li>Ship Spare Parts Fabrications and Reproductions</li>
+                <li>General Machining</li>
+                <li>Electric Motor and Alternator Coil Rewinding</li>
+                <li>Electromechanical Engineering</li>
+                <li>Electronic and Instrumentation</li>
+            </ul>
+            <h3>Transportation (Marine) Logistics</h3>
+            <ul>
+                <li>Offshore construction/installation vessels</li>
+                <li>Crew supply vessels (CSVs)</li>
+                <li>Platform supply vessels (PSVs)</li>
+                <li>Anchor handling tugs (AHTs)</li>
+                <li>Accommodation vessels (AVs)</li>
+            </ul>
+            <h3>Training and Development</h3>
+            <p>Project management, communication skills for effective management, professional supervision skills workshop, performance management, management of change, strategy management-recruitment, project management value, base leadership, total quality management, leadership and team building, attitude development/assertive skills etc.</p>
+        </div>
+    </section>
+    
+    <section id="vessels">
+        <div class="section-container">
+            <h2>Types of Offshore Vessels We Support</h2>
+            <div class="vessel-block">
+                <div class="vessel-item">
+                    <img src="images/ahts-vessel.png" alt="AHTS">
+                    <h3>Anchor Handling and Towing Support Vessels (AHTS)</h3>
+                    <p>Versatile vessels for anchor handling and towing in offshore environments.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Bollard pull up to 200+ tons; supports rig moves and towing at speeds >10 knots. Essential for deepwater ops in Nigerian waters (e.g., 500m+ depths per NUPRC standards).</p>
+                        <ul>
+                            <li>Capacity: 5,000+ bbl mud; dynamic positioning (DP2) for stability.</li>
+                            <li>Usage: 70% of offshore rig relocations in West Africa.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/dsv-vessel.png" alt="DSV">
+                    <h3>Diving Support Vessels (DSV)</h3>
+                    <p>Ships equipped for underwater diving and ROV support.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Supports saturation diving to 300m; integrated ROVs for subsea inspections. Complies with IMCA guidelines for safe ops in Gulf of Guinea.</p>
+                        <ul>
+                            <li>Capacity: 12+ divers; moonpool for direct subsea access.</li>
+                            <li>Usage: Critical for pipeline repairs, reducing downtime by 40%.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/psv-vessel.png" alt="PSV">
+                    <h3>Platform Support Vessels (PSV)</h3>
+                    <p>Vessels transporting supplies to offshore platforms.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Deck area 500+ m²; carries bulk mud, fuel, and cargo up to 1,000 tons. Meets OCIMF standards for safe transfers in Nigerian EEZ.</p>
+                        <ul>
+                            <li>Capacity: 3,000 m³ liquids; DP1 for precise positioning.</li>
+                            <li>Usage: Handles 80% of routine supply runs to FPSOs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/mpsv-vessel.png" alt="MPSV">
+                    <h3>Multipurpose Platform Support Vessels (MPSV)</h3>
+                    <p>Multi-role vessels for various offshore tasks.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Cranes up to 100 tons; ROV/AUV deployment for maintenance. Versatile for subsea installs per API RP 17A.</p>
+                        <ul>
+                            <li>Capacity: 2,500 m³ cargo; helideck for rapid crew changes.</li>
+                            <li>Usage: Supports 50+ project types, from welding to decommissioning.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/fsiv-vessel.png" alt="FSIV">
+                    <h3>Fast Supply Intervention Vessels (FSIV)</h3>
+                    <p>High-speed vessels for rapid offshore intervention.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Speeds >30 knots; emergency response time <2 hours to platforms. Equipped for medevac per SOLAS Chapter III.</p>
+                        <ul>
+                            <li>Capacity: 12 passengers; shallow draft for nearshore access.</li>
+                            <li>Usage: Reduces intervention costs by 30% in urgent scenarios.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/osv-vessel.png" alt="OSV">
+                    <h3>Offshore Support Vessels (OSV)</h3>
+                    <p>General support for offshore activities.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Multi-function: towing, supply, standby; complies with ISM Code for safety. Common in Nigerian offshore fields.</p>
+                        <ul>
+                            <li>Capacity: 1,000 tons deck load; 100+ POB.</li>
+                            <li>Usage: Versatile for 24/7 ops, covering 60% of support needs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/crewboat.png" alt="Crewboat">
+                    <h3>Crewboat</h3>
+                    <p>Fast crew transfer vessels.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Speeds 30-40 knots; transfers 50+ personnel safely. Meets MCA Category A for high-speed ops.</p>
+                        <ul>
+                            <li>Capacity: Air-conditioned cabins; life-saving appliances for 100%.</li>
+                            <li>Usage: Daily rotations, minimizing rig downtime by 25%.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/tugboat.png" alt="Tugboats">
+                    <h3>Tugboats</h3>
+                    <p>Powerful towing and maneuvering boats.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Bollard pull 50-100 tons; assists berthing per OCIMF Mooring Guidelines.</p>
+                        <ul>
+                            <li>Capacity: FFBD for fire-fighting; escort towing up to 15 knots.</li>
+                            <li>Usage: Essential for 90% of port maneuvers in Apapa.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/jack-up-barge.png" alt="Jack-Up Barge">
+                    <h3>Jack-Up Barge</h3>
+                    <p>Self-elevating barges for construction.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Legs elevate to 100m; stable for welding/crane ops per DNV-OS-J101.</p>
+                        <ul>
+                            <li>Capacity: 400 tons crane; deck 1,000 m².</li>
+                            <li>Usage: Subsea structures, used in 40% of Nigerian construction projects.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/pipe-laying-barge.png" alt="Pipe-Laying Barge">
+                    <h3>Pipe-Laying Barge</h3>
+                    <p>Barges for subsea pipeline installation.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Lays pipes 4-48" dia; S-lay/J-lay methods per API 1111.</p>
+                        <ul>
+                            <li>Capacity: 10,000 tons tensioners; burial tools for trenches.</li>
+                            <li>Usage: Builds 70% of new pipelines in deepwater fields.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/fpso.png" alt="FPSO">
+                    <h3>FPSO</h3>
+                    <p>Floating Production Storage and Offloading units.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Processes 100,000+ bpd; storage 1M+ bbls per IMO MODU Code.</p>
+                        <ul>
+                            <li>Capacity: Turret mooring for 360° weathervaning.</li>
+                            <li>Usage: Powers 50% of Nigeria's offshore production.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/oil-rig.png" alt="Oil Rigs">
+                    <h3>Oil Rigs</h3>
+                    <p>Structures for oil drilling and production.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Drills to 10,000m; jack-up/semi-sub types per API Spec 4F.</p>
+                        <ul>
+                            <li>Capacity: 30,000 psi BOP; mud systems for control.</li>
+                            <li>Usage: Extracts 2M+ bpd from Niger Delta reservoirs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/oil-tanker.png" alt="Oil and Chemicals Tankers">
+                    <h3>Oil and Chemicals Tankers</h3>
+                    <p>Tankers for oil and chemical transport.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> VLCCs carry 2M bbls; double-hull per MARPOL Annex I.</p>
+                        <ul>
+                            <li>Capacity: Inert gas systems for safety; COW for cleaning.</li>
+                            <li>Usage: Transports 80% of Nigeria's crude exports.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vessel-item">
+                    <img src="images/bulk-carrier.png" alt="Bulk Carriers">
+                    <h3>Bulk Carriers</h3>
+                    <p>Ships for unpackaged bulk cargo.</p>
+                    <a href="#" class="read-more" onclick="event.preventDefault(); toggleDetails(this.parentElement);">Read More</a>
+                    <div class="details">
+                        <p><strong>Key Facts:</strong> Capesize 170,000 DWT; holds for ore/coal per IACS Common Rules.</p>
+                        <ul>
+                            <li>Capacity: 12-20 holds; gearless loading.</li>
+                            <li>Usage: Hauls 60% of global dry bulk, including Nigerian minerals.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team">
+        <div class="section-container">
+            <h2>Our Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h4>Engr. Justin J. Akpan (MD/CEO)</h4>
+                    <p>Managing Director/Chief Executive Director. Holds a Master’s in Marine Engineering & Automotive Engines Overhauling and Repairs. Over 15 years' experience in deep-sea marine/offshore oil & gas fields.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Mr. Peter Ekong</h4>
+                    <p>General Manager. B.Sc in Govt/Public Administration from Abia State University. Oversees overall operations.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Engr. Akanimoh L. Ekpe</h4>
+                    <p>Technical Manager. B.Eng, MNSE, COREN, PGD, HND, MSc in Electrical/Electronic Engineering. Registered COREN Member.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Barrister Kate Ononkwo</h4>
+                    <p>General Secretary and Legal Adviser. B.Sc LLB from University of Calabar.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Mrs. Udoka J. Justin</h4>
+                    <p>Chief Accountant/Financial Secretary. Accounting from Polytechnic of Calabar.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Engr. Etukumana Eka Esther</h4>
+                    <p>Assistant Technical Manager. Higher National Diploma in Electrical/Electronics Engineering (Power/Machine Option).</p>
+                </div>
+                <div class="team-member">
+                    <h4>Engr. Victor Enynna</h4>
+                    <p>Technical Supervisor. Holds Second Class Upper National Diploma in Mechanical Engineering from Samundra Maritime Institute, India.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Engr. Emmanuel J. Akpan</h4>
+                    <p>Technical Manager. Graduate in Mechanical Engineering with Upper Credit from Yaba College of Technology, Lagos. Joined in 2012 as Operations/Fleet Manager.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Mr. Akpan, Ememobong Monday</h4>
+                    <p>Human Resource Manager. Holds Higher National Diploma in Electrical/Electronics from Federal Polytechnic, Eket. Registered Corporate Member of The Nigerian Society of Engineering.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Mr. Inyang Kingsley Bassey</h4>
+                    <p>HSE Superintendent. Holds B.Sc in Computer Science from University of Uyo.</p>
+                </div>
+                <div class="team-member">
+                    <h4>Commander Emmanuel Egbo-Egbo</h4>
+                    <p>Chief Security Officer (CSO/NAVAL).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="clients">
+        <div class="section-container">
+            <h2>Our Esteemed Clients</h2>
+            <div class="clients">
+                <div class="client">ExxonMobil</div>
+                <div class="client">Chevron</div>
+                <div class="client">BG Exploration</div>
+                <div class="client">NLNG</div>
+                <div class="client">Agip</div>
+                <div class="client">Oando</div>
+                <div class="client">Seplat</div>
+                <div class="client">PAN</div>
+                <div class="client">Network Exploration</div>
+            </div>
+            <h3>Financial Projection</h3>
+            <p>The company's projected performance in 2011 is in line with the dynamic vision involved during the strategic business planning of the management team. We believe that with the right team, good planning and quality general base, we envisage strongly a remarkable and very substantial turnover achievement within the next 3 years considering the various opportunities in the industries under focus and the various programmes being put in place by government and relevant agencies.</p>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="section-container">
+            <h2>Get in Touch</h2>
+            <p>Head Office: No. 33 Creek Road, Ibru Jetty, Apapa, Lagos, Nigeria<br>
+            Telephone: +234 803 669 2362 | +234 810 360 8176<br>
+            Email: <a href="mailto:deepseasteelmagine@gmail.com">deepseasteelmagine@gmail.com</a></p>
+            <p>Branch Office: No. 5 Afaha Uqua-Obotim Street, Eket LGA, Akwa Ibom State<br>
+            Telephone: +234 906 696 2627</p>
+            <p>We're ready to discuss your marine and offshore project needs. Let's build something strong together.</p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Sea-Steel Marine & Offshore Services Ltd. All rights reserved. | RC: 1060991</p>
+    </footer>
+
+    <a href="https://wa.me/2347087342882" id="chat-btn" title="Chat on WhatsApp" target="_blank">💬</a>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            if (menu.classList.contains('active')) {
+                hamburger.style.display = 'none';
+            } else {
+                hamburger.style.display = 'flex';
+            }
+        }
+        function closeMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.remove('active');
+            hamburger.style.display = 'flex';
+        }
+        function toggleDetails(item) {
+            const readMore = item.querySelector('.read-more');
+            const details = item.querySelector('.details');
+            
+            if (item.classList.contains('active')) {
+                // Collapse
+                item.classList.remove('active');
+                readMore.textContent = 'Read More';
+                details.style.maxHeight = '0px';
+                details.style.opacity = '0';
+            } else {
+                // Expand dynamically to full content height
+                item.classList.add('active');
+                readMore.textContent = 'Read Less';
+                details.style.maxHeight = details.scrollHeight + 'px';
+                details.style.opacity = '1';
+            }
+        }
+        // Close menu on outside click
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                closeMenu();
+            }
+        });
+        // Scroll fade for nav
+        let ticking = false;
+        function updateNav() {
+            const nav = document.querySelector('nav');
+            const scrolled = window.pageYOffset > 0;
+            if (scrolled) {
+                nav.classList.add('scrolled');
+                document.body.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+                document.body.classList.remove('scrolled');
+            }
+            ticking = false;
+        }
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateNav);
+                ticking = true;
+            }
+        });
+    </script>
+</body>
+</html>
