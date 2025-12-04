@@ -17,6 +17,7 @@
             --dark-gray: #333333;
             --light-gray: #666666;
             --steel-gray: #708090;
+            --silver: #C0C0C0;
         }
         * {
             box-sizing: border-box;
@@ -100,20 +101,23 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
             position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
+            right: 20px;
+            top: 20px;
             z-index: 1002;
             transition: opacity 0.3s ease;
+            background: rgba(0, 168, 232, 0.1);
+            border: 1px solid var(--light-blue);
+            border-radius: 4px;
         }
         .hamburger span {
             width: 25px;
             height: 3px;
-            background: var(--white);
+            background: var(--silver);
             margin: 3px 0;
             transition: 0.3s;
+            border-radius: 2px;
         }
         .mobile-menu.active ~ .hamburger {
             display: none;
@@ -486,7 +490,7 @@
                 padding: 1rem 0.5rem;
             }
             header h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             header p {
                 font-size: 1rem;
